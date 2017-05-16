@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <title>{% block title %} {% endblock %}</title>
+    </head>
+    <body>
+        <header>
+        Mon header projet
+        {% load static %}
+        </header>
+        <nav>
+        </nav>
+        <section id="content">
+            {% block content %}{%endblock%}
+        </section>
+        <footer>Mon footer</footer>
+    </body>
+</html>
