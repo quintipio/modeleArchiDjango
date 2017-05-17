@@ -57,7 +57,7 @@ ROOT_URLCONF = 'blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['blogPython/template/','template/'],
+        'DIRS': ['blogPython/template/','template/',],
         'APP_DIRS': True,
         'OPTIONS': {
             'debug': True,
@@ -66,13 +66,14 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'blog.context_processors.get_infos'
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'blog.wsgi.application'
-#APPEND_SLASH = True  Ajoute un slash en fin d'URL
+APPEND_SLASH = True  #Ajoute un slash en fin d'URL
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
@@ -130,3 +131,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR,"static"),
 )
+
+EMAIL_HOST = ""
+EMAIL_PORT = ""
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ""
+EMAIL_USE_SSL = True

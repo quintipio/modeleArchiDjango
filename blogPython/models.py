@@ -2,12 +2,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Utilisateur(models.Model):
     user = models.OneToOneField(User)
     inscrit_newsletter = models.BooleanField(default=False)
     
     def __str__(self):
         return self.user.username
+
 
 class Categorie(models.Model):
     nom = models.CharField(max_length=30)
@@ -26,11 +28,11 @@ class Article(models.Model):
     def __str__(self):
         return self.titre
     
-    
 
 class CategArticle(models.Model):
     categorie = models.ForeignKey("Categorie")
     article = models.ForeignKey("Article")
+
 
 class Commentaire(models.Model):
     auteur = models.ForeignKey("Utilisateur")
@@ -41,4 +43,13 @@ class Commentaire(models.Model):
     def __str__(self):
         return self.text    
     
-    
+
+class Message(models.Model):
+    origine = models.CharField(max_length=100)
+    text = models.TextField(null=True)
+    sujet = models.CharField(max_length=150)
+    envoi = models.DateTimeField(auto_now_add=True, verbose_name="Date")
+    lu = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.sujet

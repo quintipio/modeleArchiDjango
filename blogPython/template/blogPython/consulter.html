@@ -2,8 +2,8 @@
 {% block title %} {{article.titre}} {% endblock %}
 {% block content %}
     <article>
-        <h1>{{article.titre}}</h1>
-        <p>Par {{article.auteur.username}} le {{article.datePublication}}</p>
+        <h1 class="titreArticle">{{article.titre}}</h1>
+        <p>Par {{article.auteur.user.username}} le {{article.datePublication|date:"dd/MM/yyyy"}}</p>
         <p>{{article.contenu}}</p>
     </article>
 {% endblock %}

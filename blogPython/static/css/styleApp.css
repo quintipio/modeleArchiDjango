@@ -12,6 +12,20 @@ header {
     margin-bottom: 5px;
 }
 
+.header-right {
+    text-align: center;
+    color : white;
+    vertical-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    padding-top: 15px;
+}
+
+.header-right a {
+    font-weight: normal;
+    font-size: 14px;
+}
+
 nav ul li a{
     font-size:17px;
 }
@@ -101,4 +115,9 @@ footer ul li a ::hover {
     .container {
         width: 1170px;
     }
+}
+
+.titreArticle {
+    text-align: center;
+    color:#66512c;
 }

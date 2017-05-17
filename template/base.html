@@ -25,10 +25,14 @@
                                 <div class="row">
                                     <ul class="nav navbar-nav col-sm-6">
                                         <li > <a href="{% url "accueil" %}">Accueil</a> </li>
-                                        <li > <a href="{% url "connexion" %}">Se connecter</a> </li>
                                     </ul>
                                     <div class="col-lg-offset-2 col-sm-4 header-right">
-                                        
+                                        {%if user.is_authenticated %}
+                                            Bonjour, {{user.username}} ! {{ date_actuelle }}
+                                            <a href="{% url 'deconnexion' %}">Deconnexion</a>
+                                        {%else%}
+                                            <a href="{% url "connexion" %}">Se connecter</a>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -41,7 +45,9 @@
                 <aside class="col-sm-2 menu">
                     Menu
                     <ul>
-                        <li><a>Ajouter un article</a></li>
+                        {%if user.is_authenticated %}
+                        <li><a href="{% url "ajouter_article" %}">Ajouter un article</a></li>
+                        {% endif %}
                         <li><a>Rechercher</a></li>
                     </ul>
                 </aside>
