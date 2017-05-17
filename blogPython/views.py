@@ -3,9 +3,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from blogPython.models import Article,Message
-from blogPython.forms import ConnexionForm,ContactForm
+from blogPython.forms import ConnexionForm, ContactForm, ArticleForm
 from django.contrib.auth import logout,login, authenticate
+from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
+from django.template.defaultfilters import slugify
 
 
 def accueil(request):
@@ -18,11 +20,22 @@ def consulter_article(request, id_article, slug):
     return render(request,'blogPython/consulter.html', {'article': article})
 
 
+@login_required
 def editer_article(request, id_article, slug):
+    article = get_object_or_404(Article, id=id_article, slug=slug)
+
     return render(request,'blogPython/editerArticle.html')
 
+
+@login_required
 def ajouter_article(request):
-    return render(request,'blogPython/editerArticle.html')
+    form = ArticleForm(request.POST or None)
+    if form.is_valid():
+        article = form.save(commit=False)
+        form.auteur = request.user.utilisateur
+        form.slug = slugify(form.titre)
+        form.save()
+    return render(request, 'blogPython/editerArticle.html', locals())
 
 
 def consulter_liste_article_date(request, mois, annee):

@@ -2,9 +2,11 @@
 from django import forms
 from blogPython.models import Article
 
+
 class ConnexionForm(forms.Form):
     username = forms.CharField(label="Nom d'utilisateur", max_length=30)
     password = forms.CharField(label="Mot de passe",widget=forms.PasswordInput)
+
 
 class ContactForm(forms.Form):
     sujet = forms.CharField(max_length=100)
@@ -20,5 +22,13 @@ class ContactForm(forms.Form):
             if'spam' in sujet and 'spam' in message:
                 msg = "Vous parlez de spam dans le sujet et le message"
                 self.add_error("message",msg)
-            
+
         return cleaned_data
+
+
+class ArticleForm(forms.ModelForm):
+    class Meta:
+        model = Article
+        exclude = ('auteur', 'slug')
+        fields = ('titre', 'contenu')
+
