@@ -5,5 +5,12 @@
         <h1 class="titreArticle">{{article.titre}}</h1>
         <p>Par {{article.auteur.user.username}} le {{article.datePublication|date:"dd/MM/yyyy"}}</p>
         <p>{{article.contenu}}</p>
+        <p>
+            {% for categ in article.categories.all %}
+                <a>{{categ.nom}}</a>
+                {%empty%}
+                Aucune categorie
+            {%endfor%}
+        </p>
     </article>
 {% endblock %}

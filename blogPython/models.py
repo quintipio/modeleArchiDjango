@@ -19,6 +19,7 @@ class Categorie(models.Model):
     
 
 class Article(models.Model):
+    categories = models.ManyToManyField(Categorie, related_name="Categorie") 
     titre = models.CharField(max_length=150)
     auteur = models.ForeignKey("Utilisateur")
     datePublication = models.DateTimeField(auto_now=True, verbose_name="Date de parution")
@@ -27,11 +28,6 @@ class Article(models.Model):
     
     def __str__(self):
         return self.titre
-    
-
-class CategArticle(models.Model):
-    categorie = models.ForeignKey("Categorie")
-    article = models.ForeignKey("Article")
 
 
 class Commentaire(models.Model):
@@ -53,3 +49,12 @@ class Message(models.Model):
 
     def __str__(self):
         return self.sujet
+    
+
+class TraceAppli(models.Model):
+    utilisateur = models.CharField(max_length=200)
+    heure = models.DateTimeField(auto_now_add=True)
+    action = models.CharField(max_length=255)
+    
+    def __str__(self):
+        return "{} fait par {} à {}".format(self.action,self.utilisateur,self.heure)

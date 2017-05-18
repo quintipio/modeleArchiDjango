@@ -53,6 +53,13 @@
                 </aside>
                 
                 <section class="col-sm-offset-1 col-sm-9">
+                {% if messages %}
+                    <ul class="pessages">
+                        {%for message in messages %}
+                            <li{%if message.tags%}class="{{message.tags}}"{%endif%}>{{message}}</li>
+                        {%endfor%}
+                    </ul>
+                {%endif%}
                     {% block content %}{%endblock%}
                 </section>
             </div>

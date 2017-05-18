@@ -57,6 +57,7 @@ ROOT_URLCONF = 'blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        #'DIRS': ['../blogPython/template/','../template/',],
         'DIRS': ['blogPython/template/','template/',],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -71,6 +72,13 @@ TEMPLATES = [
         },
     },
 ]
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'cache_blog',
+    }
+}
 
 WSGI_APPLICATION = 'blog.wsgi.application'
 APPEND_SLASH = True  #Ajoute un slash en fin d'URL

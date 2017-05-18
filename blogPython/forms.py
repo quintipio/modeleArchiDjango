@@ -30,5 +30,9 @@ class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
         exclude = ('auteur', 'slug')
-        fields = ('titre', 'contenu')
+        fields = ('titre', 'categories', 'contenu')
+        widgets = {
+            'contenu' : forms.Textarea(),
+            'categories' : forms.CheckboxSelectMultiple()
+            }
 

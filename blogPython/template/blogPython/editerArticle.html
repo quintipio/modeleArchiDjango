@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{% block title %} Editer un article {% endblock %}
+{% block title %} Modifier un article {% endblock %}
 {% block content %}
-    <form action="{% url "ajouter_article" %}" method="post">
+    <form action="{% url "modifier_article" id_article=article.id slug=article.slug %}" method="post">
         {%csrf_token %}
         {{form.as_p}}
-        <input type="submit" value="Valider" />
+        <input type="submit" value="Modifier" />
     </form>
 {% endblock %}

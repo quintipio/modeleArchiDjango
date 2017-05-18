@@ -2,13 +2,41 @@
 {% block title %} Acceuil du blog {% endblock %}
 {% block content %}
 
-    {% for article in dernier_articles %}
+    {% for article in articles_page %}
         <article>
             <h2 class="titreArticle">{{article.titre}}</h2>
-            <p>Par {{article.auteur.user.username}} le {{article.datePublication|date:"dd/MM/yyyy"}}</p>
+            <p>Par {{article.auteur.user.username}} le {{article.datePublication|date:"d M Y"}}
+            {%if user.is_authenticated %}
+                <br/>
+                <a href="{% url 'modifier_article' id_article=article.id slug=article.slug %}">Modifier</a>
+                <br/>
+                <a href="{% url 'supprimer_article' id_article=article.id slug=article.slug %}">Supprimer</a>
+            {% endif %}
+            </p>
             <p>{{article.contenu|truncatewords_html:20}}</p>
+            <p>
+                {% for categ in article.categories.all %}
+                    <a>{{categ.nom}}</a>
+                    {%empty%}
+                    Aucune categorie
+                {%endfor%}
+            </p>
         <p><a style="text-align: center" href="{%url 'afficher_article' id_article=article.id slug=article.slug %}">Lire la suite</a>
         </article>
     {%endfor%}
+    
+    <div id="pagination">
+        {% if articles_page.has_previous %}
+            <a href="{% url "accueil" page=articles_page.previous_page_number %}">Précédent</a>
+        {%endif%}
+        
+        <span>
+            Page {{articles_page.number}} sur {{articles_page.paginator.num_pages}}
+        </span>
+        
+        {% if articles_page.has_next %}
+            <a href="{% url "accueil" page=articles_page.next_page_number %}">Suivant</a>
+        {%endif%}
+    </div>
 
 {% endblock %}
